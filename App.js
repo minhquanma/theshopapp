@@ -1,14 +1,16 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import store from './store/reducers';
+import store from './store';
 import { Provider } from 'react-redux';
-import { navigations, screenOptions } from './navigation/ShopNavigator';
+import { renderShopNavigator } from './navigation/ShopNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 
-const { Navigator, Screen } = createStackNavigator();
+
 
 const fetchFonts = async () => {
   return await Font.loadAsync({
@@ -23,16 +25,7 @@ export default function App() {
   return isFontLoaded ? (
     <Provider store={store}>
       <NavigationContainer>
-        <Navigator screenOptions={screenOptions}>
-          {navigations.map(({ name, options, component }) => (
-            <Screen
-              key={name}
-              name={name}
-              options={options}
-              component={component}
-            />
-          ))}
-        </Navigator>
+        {renderShopNavigator()}
       </NavigationContainer>
     </Provider>
   ) : (
