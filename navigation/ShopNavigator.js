@@ -4,14 +4,15 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { renderProductNavigator } from './ProductNavigator';
 import { renderOrdersNavigator } from './OrderNavigator';
 import { Ionicons } from '@expo/vector-icons';
+import { renderAdminNavigator } from './AdminNavigator';
 
 const shopNavs = [
   {
     name: 'ProductsNavigator',
     component: renderProductNavigator,
     options: {
-      title: 'Products',
-      drawIcon: ({ focused, color, size }) => (
+      drawerLabel: 'Products',
+      drawerIcon: ({ focused, color, size }) => (
         <Ionicons
           name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
           size={23}
@@ -24,10 +25,24 @@ const shopNavs = [
     name: 'ShopNavigator',
     component: renderOrdersNavigator,
     options: {
-      title: 'Orders',
-      drawIcon: ({ focused, color, size }) => (
+      drawerLabel: 'Orders',
+      drawerIcon: ({ focused, color , size }) => (
         <Ionicons
           name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+          size={23}
+          color={color}
+        />
+      )
+    }
+  },
+  {
+    name: 'AdminNavigator',
+    component: renderAdminNavigator,
+    options: {
+      drawerLabel: 'Admin',
+      drawerIcon: ({ focused, color, size }) => (
+        <Ionicons
+          name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
           size={23}
           color={color}
         />
